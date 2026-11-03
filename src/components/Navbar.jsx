@@ -43,9 +43,9 @@ const Navbar = () => {
             window.scrollTo(0, 0);
           }}
         >
-          <span className='w-10 h-10 rounded-full bg-[#915EFF] grid place-items-center text-white font-black'>AK</span>
+          <span className='w-10 h-10 rounded-full bg-[#915EFF] grid place-items-center text-white font-black'>A</span>
           <p className='text-white text-[18px] font-bold cursor-pointer flex '>
-            Anish Kumar &nbsp;
+            Anish Thakur &nbsp;
             <span className='xl:block hidden'> | Full Stack Developer</span>
           </p>
         </Link>

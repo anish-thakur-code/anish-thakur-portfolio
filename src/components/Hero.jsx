@@ -16,12 +16,17 @@ const Hero = () => {
         </div>
 
         <div className='relative z-10'>
+          <p className='mb-2 text-[#bda7ff] text-[13px] sm:text-[15px] font-semibold uppercase tracking-[0.18em]'>
+            MERN STACK DEVELOPER · COMPUTER SCIENCE STUDENT
+          </p>
           <h1 className={`${styles.heroHeadText} text-white`}>
             Hi, I'm <span className='text-[#915EFF]'>Anish</span>
           </h1>
-          <p className={`${styles.heroSubText} mt-2 text-white-100`}>
-            I build responsive web experiences <br className='sm:block hidden' />
-            across the full MERN stack.
+          <p className={`${styles.heroSubText} mt-3 max-w-xl text-white-100`}>
+            I build full-stack applications that solve real-world problems.
+          </p>
+          <p className='mt-2 max-w-xl text-[#dfd9ff]/90 text-[15px] sm:text-[17px] leading-relaxed'>
+            Passionate about building responsive web experiences with React, Node.js, Express, MongoDB, and n8n workflow automation.
           </p>
           <div className='mt-7 flex flex-wrap gap-4'>
             <a href='#projects' className='rounded-xl bg-[#915EFF] px-6 py-3 text-white font-semibold shadow-lg shadow-[#915EFF]/20'>

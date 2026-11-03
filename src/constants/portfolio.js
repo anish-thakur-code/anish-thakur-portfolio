@@ -50,10 +50,10 @@ export const technologies = [
 
 export const skillGroups = [
   { label: "Languages", skills: ["C", "C++", "Java", "Python", "JavaScript"] },
-  { label: "Frontend", skills: ["React.js", "HTML5", "CSS3", "JavaScript (ES6+)"] },
+  { label: "Frontend", skills: ["React.js", "Vite", "HTML5", "CSS3", "JavaScript (ES6+)"] },
   { label: "Backend", skills: ["Node.js", "Express.js", "REST APIs"] },
-  { label: "Database", skills: ["MongoDB", "MySQL", "SQL", "DBMS concepts"] },
-  { label: "Tools", skills: ["Git", "GitHub", "VS Code", "Postman"] },
+  { label: "Database", skills: ["MongoDB", "Mongoose", "MySQL", "SQL", "DBMS concepts"] },
+  { label: "Tools", skills: ["Git", "GitHub", "VS Code", "Postman", "n8n"] },
 ];
 
 export const experiences = [
@@ -74,7 +74,7 @@ export const experiences = [
     icon: web,
     iconBg: "#383E56",
     points: [
-      "Solved problems covering arrays, strings, and recursion.",
+      "Solved 60+ LeetCode problems across multiple DSA topics, including arrays, strings, and recursion.",
       "Focused on improving both time and space complexity through consistent problem-solving practice.",
     ],
   },
@@ -90,6 +90,20 @@ export const certifications = [
 ];
 
 export const projects = [
+  {
+    name: "Campus Voice",
+    year: "2026",
+    monogram: "CV",
+    description: "A MERN app to collect student feedback, with a React (Vite) form and an Express/Mongoose API storing submissions in MongoDB.",
+    highlights: "Automated notifications with an n8n webhook triggered on every new submission; deployed live on Vercel.",
+    tags: [
+      { name: "React", color: "blue-text-gradient" },
+      { name: "Node.js", color: "green-text-gradient" },
+      { name: "n8n", color: "pink-text-gradient" },
+    ],
+    source_code_link: profile.github,
+    live_link: "https://student-feedback-kappa.vercel.app/",
+  },
   {
     name: "Course Selling Platform",
     year: "2024",
