@@ -4,12 +4,12 @@ import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
 
 import CanvasLoader from "../Loader";
 
-const getIsMobileViewport = () => {
+const getIsLowPowerViewport = () => {
   if (typeof window === "undefined") return false;
-  return window.innerWidth <= 768 || window.matchMedia("(max-width: 768px)").matches;
+  return window.innerWidth <= 1024 || window.matchMedia("(max-width: 1024px)").matches;
 };
 
-const Computers = ({ isMobile }) => {
+const Computers = ({ isLowPower }) => {
   const computer = useGLTF("/desktop_pc/scene.gltf");
 
   return (
@@ -20,14 +20,14 @@ const Computers = ({ isMobile }) => {
         angle={0.12}
         penumbra={1}
         intensity={1}
-        castShadow={!isMobile}
-        shadow-mapSize={isMobile ? 512 : 1024}
+        castShadow={!isLowPower}
+        shadow-mapSize={isLowPower ? 512 : 1024}
       />
       <pointLight intensity={1} />
       <primitive
         object={computer.scene}
-        scale={isMobile ? 0.58 : 0.82}
-        position={isMobile ? [0, -1.6, -2.6] : [0, -1.5, -1.5]}
+        scale={isLowPower ? 0.52 : 0.82}
+        position={isLowPower ? [0, -1.8, -2.8] : [0, -1.5, -1.5]}
         rotation={[-0.01, -0.2, -0.1]}
       />
     </mesh>
@@ -35,13 +35,13 @@ const Computers = ({ isMobile }) => {
 };
 
 const ComputersCanvas = () => {
-  const [isMobile, setIsMobile] = useState(getIsMobileViewport);
+  const [isLowPower, setIsLowPower] = useState(getIsLowPowerViewport);
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia("(max-width: 768px)");
-    const handleMediaQueryChange = (event) => setIsMobile(event.matches);
+    const mediaQuery = window.matchMedia("(max-width: 1024px)");
+    const handleMediaQueryChange = (event) => setIsLowPower(event.matches);
 
-    setIsMobile(mediaQuery.matches);
+    setIsLowPower(mediaQuery.matches);
 
     if (typeof mediaQuery.addEventListener === "function") {
       mediaQuery.addEventListener("change", handleMediaQueryChange);
@@ -55,9 +55,9 @@ const ComputersCanvas = () => {
   return (
     <Canvas
       frameloop='always'
-      shadows={!isMobile}
-      dpr={isMobile ? [1, 1.5] : [1, 2]}
-      camera={{ position: [20, 3, 5], fov: isMobile ? 30 : 25 }}
+      shadows={!isLowPower}
+      dpr={isLowPower ? [1, 1.25] : [1, 1.7]}
+      camera={{ position: [20, 3, 5], fov: isLowPower ? 30 : 25 }}
       gl={{
         preserveDrawingBuffer: false,
         antialias: true,
@@ -73,7 +73,7 @@ const ComputersCanvas = () => {
           maxPolarAngle={Math.PI / 2}
           minPolarAngle={Math.PI / 2}
         />
-        <Computers isMobile={isMobile} />
+        <Computers isLowPower={isLowPower} />
         <Preload all />
       </Suspense>
     </Canvas>
