@@ -24,12 +24,25 @@ const hasWebGLSupport = () => {
 };
 
 const FallbackVisual = () => (
-  <div className='relative w-full h-full rounded-[28px] border border-white/10 bg-[radial-gradient(circle_at_center,_rgba(145,94,255,0.45),_rgba(15,23,42,0.96)_58%,_rgba(2,6,23,1)_100%)] flex items-center justify-center overflow-hidden'>
+  <div className='mobile-3d-fallback relative w-full h-full rounded-[28px] border border-white/10 flex items-center justify-center overflow-hidden'>
     <div className='absolute inset-0 opacity-80 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.18),_transparent_50%)]' />
+    <div className='mobile-3d-orb absolute h-44 w-44 rounded-full bg-[#915EFF]/30 blur-2xl' />
+    <div className='mobile-3d-orb absolute bottom-8 right-8 h-28 w-28 rounded-full bg-cyan-400/20 blur-2xl' />
+
     <div className='relative z-10 text-center px-4'>
       <div className='text-[10px] uppercase tracking-[0.35em] text-violet-200/90'>Portfolio</div>
       <div className='mt-3 text-2xl sm:text-3xl font-bold text-white'>Anish Thakur</div>
       <div className='mt-2 text-sm text-slate-200'>Full Stack Developer</div>
+      <div className='mt-5 flex flex-wrap items-center justify-center gap-2'>
+        {['React', 'Node', 'MongoDB', 'Three.js'].map((item) => (
+          <span
+            key={item}
+            className='rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[10px] font-medium text-slate-100 tracking-[0.12em] uppercase'
+          >
+            {item}
+          </span>
+        ))}
+      </div>
     </div>
   </div>
 );
