@@ -9,6 +9,31 @@ const getIsLowPowerViewport = () => {
   return window.innerWidth <= 1024 || window.matchMedia("(max-width: 1024px)").matches;
 };
 
+const hasWebGLSupport = () => {
+  if (typeof window === "undefined") return false;
+
+  try {
+    const canvas = document.createElement("canvas");
+    return !!(
+      window.WebGLRenderingContext &&
+      (canvas.getContext("webgl") || canvas.getContext("experimental-webgl"))
+    );
+  } catch (error) {
+    return false;
+  }
+};
+
+const FallbackVisual = () => (
+  <div className='relative w-full h-full rounded-[28px] border border-white/10 bg-[radial-gradient(circle_at_center,_rgba(145,94,255,0.45),_rgba(15,23,42,0.96)_58%,_rgba(2,6,23,1)_100%)] flex items-center justify-center overflow-hidden'>
+    <div className='absolute inset-0 opacity-80 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.18),_transparent_50%)]' />
+    <div className='relative z-10 text-center px-4'>
+      <div className='text-[10px] uppercase tracking-[0.35em] text-violet-200/90'>Portfolio</div>
+      <div className='mt-3 text-2xl sm:text-3xl font-bold text-white'>Anish Thakur</div>
+      <div className='mt-2 text-sm text-slate-200'>Full Stack Developer</div>
+    </div>
+  </div>
+);
+
 const Computers = ({ isLowPower }) => {
   const computer = useGLTF("/desktop_pc/scene.gltf");
 
@@ -36,12 +61,14 @@ const Computers = ({ isLowPower }) => {
 
 const ComputersCanvas = () => {
   const [isLowPower, setIsLowPower] = useState(getIsLowPowerViewport);
+  const [supportsWebGL, setSupportsWebGL] = useState(hasWebGLSupport);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 1024px)");
     const handleMediaQueryChange = (event) => setIsLowPower(event.matches);
 
     setIsLowPower(mediaQuery.matches);
+    setSupportsWebGL(hasWebGLSupport());
 
     if (typeof mediaQuery.addEventListener === "function") {
       mediaQuery.addEventListener("change", handleMediaQueryChange);
@@ -51,6 +78,10 @@ const ComputersCanvas = () => {
     mediaQuery.addListener(handleMediaQueryChange);
     return () => mediaQuery.removeListener(handleMediaQueryChange);
   }, []);
+
+  if (isLowPower || !supportsWebGL) {
+    return <FallbackVisual />;
+  }
 
   return (
     <Canvas
