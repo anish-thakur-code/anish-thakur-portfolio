@@ -4,6 +4,11 @@ import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
 
 import CanvasLoader from "../Loader";
 
+const getIsMobileViewport = () => {
+  if (typeof window === "undefined") return false;
+  return window.innerWidth <= 768 || window.matchMedia("(max-width: 768px)").matches;
+};
+
 const Computers = ({ isMobile }) => {
   const computer = useGLTF("/desktop_pc/scene.gltf");
 
@@ -21,8 +26,8 @@ const Computers = ({ isMobile }) => {
       <pointLight intensity={1} />
       <primitive
         object={computer.scene}
-        scale={isMobile ? 0.68 : 0.82}
-        position={isMobile ? [0, -1.25, -2.2] : [0, -1.5, -1.5]}
+        scale={isMobile ? 0.58 : 0.82}
+        position={isMobile ? [0, -1.6, -2.6] : [0, -1.5, -1.5]}
         rotation={[-0.01, -0.2, -0.1]}
       />
     </mesh>
@@ -30,25 +35,21 @@ const Computers = ({ isMobile }) => {
 };
 
 const ComputersCanvas = () => {
-  const [isMobile, setIsMobile] = useState(() => {
-    if (typeof window !== "undefined") {
-      return window.innerWidth <= 768 || window.matchMedia("(max-width: 768px)").matches;
-    }
-    return false;
-  });
+  const [isMobile, setIsMobile] = useState(getIsMobileViewport);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 768px)");
+    const handleMediaQueryChange = (event) => setIsMobile(event.matches);
+
     setIsMobile(mediaQuery.matches);
 
-    const handleMediaQueryChange = (event) => {
-      setIsMobile(event.matches);
-    };
+    if (typeof mediaQuery.addEventListener === "function") {
+      mediaQuery.addEventListener("change", handleMediaQueryChange);
+      return () => mediaQuery.removeEventListener("change", handleMediaQueryChange);
+    }
 
-    mediaQuery.addEventListener("change", handleMediaQueryChange);
-    return () => {
-      mediaQuery.removeEventListener("change", handleMediaQueryChange);
-    };
+    mediaQuery.addListener(handleMediaQueryChange);
+    return () => mediaQuery.removeListener(handleMediaQueryChange);
   }, []);
 
   return (
@@ -56,14 +57,14 @@ const ComputersCanvas = () => {
       frameloop='always'
       shadows={!isMobile}
       dpr={isMobile ? [1, 1.5] : [1, 2]}
-      camera={{ position: [20, 3, 5], fov: 25 }}
+      camera={{ position: [20, 3, 5], fov: isMobile ? 30 : 25 }}
       gl={{
         preserveDrawingBuffer: false,
         antialias: true,
         alpha: true,
         powerPreference: "high-performance",
       }}
-      style={{ touchAction: "pan-y" }}
+      style={{ touchAction: "pan-y", width: "100%", height: "100%" }}
     >
       <Suspense fallback={<CanvasLoader />}>
         <OrbitControls

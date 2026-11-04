@@ -7,7 +7,7 @@ import { ComputersCanvas } from "./canvas";
 const ResponsiveHero = () => (
   <section className='relative w-full min-h-screen overflow-hidden'>
     <div
-      className={`relative max-w-7xl min-h-screen mx-auto ${styles.paddingX} pt-28 sm:pt-32 lg:pt-0 pb-16 lg:pb-0 grid grid-cols-1 lg:grid-cols-2 items-center gap-8 xl:gap-12`}
+      className={`relative max-w-7xl min-h-screen mx-auto ${styles.paddingX} pt-24 xs:pt-28 sm:pt-32 lg:pt-0 pb-16 lg:pb-0 grid grid-cols-1 lg:grid-cols-2 items-center gap-6 sm:gap-8 xl:gap-12`}
     >
       <div className='relative z-10 w-full flex items-start gap-3 sm:gap-5'>
         <div className='hidden xs:flex flex-col justify-center items-center mt-3 sm:mt-5 shrink-0'>
@@ -15,8 +15,8 @@ const ResponsiveHero = () => (
           <div className='w-1 h-52 sm:h-72 lg:h-80 violet-gradient' />
         </div>
 
-        <div className='min-w-0'>
-          <p className='mb-2 text-[#bda7ff] text-[13px] sm:text-[15px] font-semibold uppercase tracking-[0.18em]'>
+        <div className='min-w-0 w-full'>
+          <p className='mb-2 text-[#bda7ff] text-[12px] xs:text-[13px] sm:text-[15px] font-semibold uppercase tracking-[0.18em]'>
             MERN STACK DEVELOPER · COMPUTER SCIENCE STUDENT
           </p>
           <h1 className={`${styles.heroHeadText} text-white`}>
@@ -25,7 +25,7 @@ const ResponsiveHero = () => (
           <p className={`${styles.heroSubText} mt-3 max-w-xl text-white-100`}>
             I build full-stack applications that solve real-world problems.
           </p>
-          <p className='mt-2 max-w-xl text-[#dfd9ff]/90 text-[15px] sm:text-[17px] leading-relaxed'>
+          <p className='mt-2 max-w-xl text-[#dfd9ff]/90 text-[14px] sm:text-[17px] leading-relaxed'>
             Passionate about building responsive web experiences with React, Node.js, Express, MongoDB, and n8n workflow automation.
           </p>
 
@@ -53,7 +53,7 @@ const ResponsiveHero = () => (
         </div>
       </div>
 
-      <div className='relative z-0 w-full h-[360px] xs:h-[400px] sm:h-[480px] md:h-[520px] lg:h-[580px] xl:h-[660px] flex items-center justify-center'>
+      <div className='relative z-0 w-full h-[260px] xs:h-[320px] sm:h-[400px] md:h-[500px] lg:h-[580px] xl:h-[660px] max-w-full mx-auto flex items-center justify-center'>
         <ComputersCanvas />
       </div>
     </div>

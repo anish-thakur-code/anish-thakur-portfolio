@@ -13,6 +13,16 @@
   color-scheme: dark;
 }
 
+html,
+body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+body {
+  min-height: 100vh;
+}
+
 .hash-span {
   margin-top: -100px;
   padding-bottom: 100px;
